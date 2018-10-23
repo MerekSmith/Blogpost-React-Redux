@@ -2,14 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { BrowserRouter, Route } from 'react-router-dom'
 
-import App from './components/app';
+// import App from './components/app'; --This is no longer needed due to using React Router. We don't really need that central file now.
 import reducers from './reducers';
+import PostsIndex from './components/posts_index';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
+
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
+    {/* <App /> */}
+    <BrowserRouter>
+      <div>
+        <Route path="/" component={PostsIndex} />
+        {/* <Route path="/posts/new" component={PostNew} /> */}
+        {/* <Route path="/posts/:id" component={PostShow} /> */}
+      </div>
+    </BrowserRouter>
   </Provider>
   , document.querySelector('.container'));
